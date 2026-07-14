@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ศูนย์รวมลิงก์การแพทย์และการพยาบาล</title>
+  <style>
+    :root { --navy:#155a78; --blue:#1679ad; --pale:#eaf6fb; --line:#d9e4ea; --ink:#193342; --muted:#627782; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); font-family:"Leelawadee UI","Tahoma",sans-serif; background:linear-gradient(135deg,#f4f8fa 0%,#e8f4f9 55%,#edf0f2 100%); min-height:100vh; }
+    header { color:white; padding:54px 24px 70px; text-align:center; background:radial-gradient(circle at 18% 20%,#4caed5 0 2px,transparent 3px),linear-gradient(120deg,#0d4e70,#217fa7 58%,#76bed9); position:relative; overflow:hidden; }
+    header::after { content:""; position:absolute; width:370px; height:370px; border:55px solid rgba(255,255,255,.09); border-radius:50%; right:-150px; top:-190px; }
+    .mark { width:58px; height:58px; margin:0 auto 15px; border-radius:18px; background:white; color:var(--blue); display:grid; place-items:center; font-size:35px; font-weight:700; box-shadow:0 10px 22px rgba(4,51,75,.22); }
+    h1 { margin:0; font-size:clamp(1.55rem,4vw,2.35rem); letter-spacing:.2px; }
+    header p { margin:10px 0 0; opacity:.91; font-size:1rem; }
+    main { max-width:1080px; margin:-36px auto 0; padding:0 22px 50px; position:relative; }
+    .intro { display:flex; justify-content:space-between; align-items:center; gap:16px; background:white; border:1px solid rgba(255,255,255,.8); border-radius:16px; padding:18px 22px; box-shadow:0 10px 30px rgba(30,79,98,.12); margin-bottom:22px; }
+    .intro strong { color:var(--navy); } .intro span { color:var(--muted); font-size:.92rem; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    a.card { min-height:174px; text-decoration:none; color:inherit; background:rgba(255,255,255,.93); padding:22px; border:1px solid var(--line); border-radius:17px; display:flex; flex-direction:column; box-shadow:0 5px 14px rgba(36,74,91,.07); transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease; }
+    a.card:hover, a.card:focus-visible { transform:translateY(-5px); border-color:#75bddd; box-shadow:0 13px 26px rgba(25,96,129,.16); outline:none; }
+    .icon { width:42px; height:42px; border-radius:12px; background:var(--pale); color:var(--blue); display:grid; place-items:center; font-size:23px; margin-bottom:15px; }
+    .card h2 { font-size:1.03rem; line-height:1.48; margin:0; font-weight:700; }
+    .open { margin-top:auto; padding-top:16px; color:var(--blue); font-size:.88rem; font-weight:700; }
+    .open::after { content:"  ↗"; font-size:1.05rem; }
+    .manage, .save, .cancel { border:0; border-radius:9px; padding:9px 13px; cursor:pointer; font:inherit; font-weight:700; }
+    .manage { color:white; background:var(--blue); white-space:nowrap; } .manage:hover { background:var(--navy); }
+    .edit-row { display:none; align-items:center; gap:8px; margin-top:15px; padding-top:12px; border-top:1px solid var(--line); }
+    .editing .edit-row { display:flex; } .edit { background:#eaf6fb; color:var(--navy); border:0; padding:6px 9px; border-radius:7px; cursor:pointer; font:inherit; font-size:.81rem; font-weight:700; }
+    .delete { color:#a72e38; background:#fff0f1; }
+    .add-card { display:none; min-height:174px; border:2px dashed #9bc8dc; border-radius:17px; background:rgba(255,255,255,.55); color:var(--blue); cursor:pointer; font:inherit; font-size:1rem; font-weight:700; }
+    .add-card span { display:block; font-size:2rem; line-height:1; margin-bottom:8px; } .editing .add-card { display:block; }
+    dialog { border:0; border-radius:18px; padding:0; width:min(470px,calc(100% - 32px)); box-shadow:0 22px 60px rgba(15,51,68,.25); }
+    dialog::backdrop { background:rgba(10,43,58,.48); backdrop-filter:blur(2px); }
+    form { padding:25px; } form h2 { margin:0 0 20px; color:var(--navy); font-size:1.25rem; } label { display:block; margin:13px 0 6px; font-size:.9rem; font-weight:700; } input { width:100%; padding:10px; border:1px solid #bfd1da; border-radius:8px; font:inherit; color:var(--ink); } input:focus { outline:2px solid #8bc7df; border-color:transparent; } .form-actions { display:flex; justify-content:flex-end; gap:9px; margin-top:22px; } .save { color:white; background:var(--blue); } .cancel { color:var(--ink); background:#edf1f3; }
+    footer { padding:18px; text-align:center; color:var(--muted); font-size:.82rem; }
+    @media (max-width:800px) { .grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:520px) { header { padding:42px 18px 62px; } main { padding:0 15px 30px; } .grid { grid-template-columns:1fr; } .intro { align-items:flex-start; flex-direction:column; } a.card { min-height:145px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="mark">+</div>
+    <h1>ศูนย์รวมลิงก์การแพทย์และการพยาบาล</h1>
+    <p>โรงพยาบาลสอยดาว</p>
+  </header>
+  <main>
+    <section class="intro"><div><strong>บริการและแบบบันทึกออนไลน์</strong><br><span>เลือกหัวข้อเพื่อเปิดแบบฟอร์มในแท็บใหม่</span></div><button class="manage" id="manage" type="button">จัดการรายการ</button></section>
+    <section class="grid" id="links" aria-label="รายการลิงก์"></section>
+  </main>
+  <footer>ศูนย์รวมลิงก์สำหรับบุคลากรทางการแพทย์และการพยาบาล</footer>
+  <dialog id="editor"><form id="link-form"><h2 id="form-title">เพิ่มหัวข้อใหม่</h2><label for="title">ชื่อหัวข้อ</label><input id="title" required maxlength="150" placeholder="เช่น แบบฟอร์มบันทึก..."><label for="url">ลิงก์เว็บไซต์</label><input id="url" type="url" required placeholder="https://example.com"><div class="form-actions"><button class="cancel" id="cancel" type="button">ยกเลิก</button><button class="save" type="submit">บันทึก</button></div></form></dialog>
+  <script>
+    const defaults = [
+      ['🧪','แบบบันทึกการทำ IQC Lactate','https://docs.google.com/forms/d/e/1FAIpQLSdZDOi6Z41rSrBk94EtxPWxKavSsp5Na0rgiKZdJCbOEIITew/viewform'],
+      ['🩸','แบบบันทึกการทำ IQC ตรวจน้ำตาลจากเส้นเลือดฝอย','https://docs.google.com/forms/d/e/1FAIpQLSebSYy48r9kb9NcHXkO0k8M5gHSdy-uf3e9b1AolcpygvGWOg/viewform'],
+      ['◉','บริจาคดวงตา','http://eyebank.redcross.or.th/eyebankthai/donationwebsite/register-donor'],
+      ['⚕','รายงานอาการไม่พึงประสงค์จากการรับเลือด','https://docs.google.com/forms/d/e/1FAIpQLSfe6lzzF_mUFSZBZVC2EWy8yJCcYu5oErPv8LFMebuid8QIEw/viewform'],
+      ['♻','แบบบันทึกขยะรีไซเคิล รพ.สอยดาว','https://docs.google.com/forms/d/e/1FAIpQLSd6usgRHqq9eSe_RXdd2HzB2bADRggNN1_eJ5oKgT-dqSH9FA/viewform?usp=header'],
+      ['♥','ทะเบียนผู้ป่วย palliative care โรงพยาบาลสอยดาว','https://docs.google.com/forms/d/e/1FAIpQLSeNE1_Y5w0yPWI0SpFvoKUBMcK2lLNSN37sNgo8YN880BMFXQ/viewform'],
+      ['⊞','การเกิดแผลกดทับในโรงพยาบาล (HAPI) ของ รพ.สอยดาว','https://docs.google.com/forms/d/e/1FAIpQLSczQANtcpgPsl88lmt0ifCGZOEnRoDSlQOpP7bjB8OYTnya_A/viewform'],
+      ['✚','Set OR','https://docs.google.com/forms/d/e/1FAIpQLSfFCi_BLQq2tb4Tjt3EJA-7_lfaF_I6uwxQwuz9gxBYUYcjcg/viewform'],
+      ['▣','ลงชื่ออยู่เวร Refer รพ.สอยดาว','https://docs.google.com/forms/d/1ihE7wfIPybnaGBhrGOvgjyia9jwZ9iW9NkGH49M7bzg/viewform?edit_requested=true']
+    ];
+    let links = JSON.parse(localStorage.getItem('medical-links') || 'null') || defaults, editing = false, selected = null;
+    const grid = document.querySelector('#links'), dialog = document.querySelector('#editor'), form = document.querySelector('#link-form');
+    const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    function persist() { localStorage.setItem('medical-links', JSON.stringify(links)); }
+    function render() { grid.innerHTML = links.map((x,i) => `<article class="card"><div class="icon">${x[0]}</div><h2>${esc(x[1])}</h2><a class="open" href="${esc(x[2])}" target="_blank" rel="noopener">เปิดลิงก์</a><div class="edit-row"><button class="edit" data-edit="${i}">แก้ไข</button><button class="edit delete" data-delete="${i}">ลบ</button></div></article>`).join('') + '<button class="add-card" id="add" type="button"><span>＋</span>เพิ่มหัวข้อใหม่</button>'; }
+    function openEditor(i=null) { selected=i; form.reset(); document.querySelector('#form-title').textContent = i === null ? 'เพิ่มหัวข้อใหม่' : 'แก้ไขหัวข้อ'; if(i !== null) { title.value=links[i][1]; url.value=links[i][2]; } dialog.showModal(); title.focus(); }
+    document.querySelector('#manage').onclick = () => { editing=!editing; document.body.classList.toggle('editing',editing); manage.textContent=editing?'เสร็จสิ้น':'จัดการรายการ'; };
+    grid.onclick = e => { const i=e.target.dataset.edit ?? e.target.dataset.delete; if(e.target.id==='add') openEditor(); else if(e.target.dataset.edit !== undefined) openEditor(+i); else if(e.target.dataset.delete !== undefined && confirm('ลบหัวข้อนี้ใช่หรือไม่?')) { links.splice(+i,1); persist(); render(); } };
+    document.querySelector('#cancel').onclick = () => dialog.close();
+    form.onsubmit = e => { e.preventDefault(); const item=['🔗', title.value.trim(), url.value.trim()]; if(selected === null) links.push(item); else links[selected]=[links[selected][0],item[1],item[2]]; persist(); render(); dialog.close(); };
+    render();
+  </script>
+</body>
+</html>
